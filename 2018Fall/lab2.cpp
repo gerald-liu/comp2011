@@ -2,7 +2,9 @@
 #include <random>
 #include <vector>
 
-using namespace std;
+using std::cin; using std::cout; using std::string;
+using std::random_device; using std::default_random_engine; using std::uniform_int_distribution;
+using std::vector;
 
 class Nim {
 public:
@@ -19,7 +21,7 @@ private:
 
     int num_heaps = 3; // >= 1
     int max_heap_size = 9; // > 1
-    const char* players[2] = { "Player A", "Player B" };
+    string players[2] = { "Player A", "Player B" };
     vector<int> heaps;
     bool is_single_player = true;
     bool is_player_a = true;
@@ -34,7 +36,7 @@ Nim::Nim() {
     default_random_engine rd_engine(rd());
     uniform_int_distribution<> dist(1, max_heap_size);
 
-    for (int i=0; i<num_heaps; i++)
+    for (int i = 0; i < num_heaps; i++)
         heaps.push_back(dist(rd_engine));
 }
 
@@ -111,13 +113,20 @@ void Nim::ai_move() {
 }
 
 void Nim::play() {
-    
+    cout << "Player A's name: \n";
+    cin >> players[0];
 
     do {
-        cout << "You're Player A. Do you want to play with another player (0) or the AI (1)?\n" <<
+        cout << "You're " << players[0] << ". Do you want to play with another player (0) or the AI (1)?\n" <<
             "Input 0 or 1 as the answer.\n";
         cin >> is_single_player;
     } while (is_single_player != 0 && is_single_player != 1);
+
+    if (!is_single_player) {
+        cout << "Player B's name: \n";
+        cin >> players[1];
+    }
+    else players[1] = "AI";
 
     print();
 
@@ -128,7 +137,7 @@ void Nim::play() {
             player_move();
 
         cout << "\n" << players[!is_player_a] << "\'s turn, remove " << num_to_move
-            << " stones from Heap " << heap_to_move << ".\n";
+            << " stone(s) from Heap " << heap_to_move << ".\n";
 
         print();
         is_player_a = !is_player_a;
