@@ -10,14 +10,15 @@ public:
     void play();
 
 private:
-    bool game_over();
+    bool game_over() const;
+    int nim_sum() const;
+    void ask_config();
     void print();
-    int nim_sum();
     void player_move();
     void ai_move();
 
-    const int NUM_HEAPS = 3; // >= 1
-    const int MAX_HEAP_SIZE = 9; // > 1
+    int num_heaps = 3; // >= 1
+    int max_heap_size = 9; // > 1
     const char* players[2] = { "Player A", "Player B" };
     vector<int> heaps;
     bool is_single_player = true;
@@ -27,40 +28,55 @@ private:
 };
 
 Nim::Nim() {
+    ask_config();
+
     random_device rd;
     default_random_engine rd_engine(rd());
-    uniform_int_distribution<> dist(1, MAX_HEAP_SIZE);
+    uniform_int_distribution<> dist(1, max_heap_size);
 
-    for (int i=0; i<NUM_HEAPS; i++)
+    for (int i=0; i<num_heaps; i++)
         heaps.push_back(dist(rd_engine));
 }
 
-bool Nim::game_over() {
+bool Nim::game_over() const {
     for (int i = 0; i < heaps.size(); i++)
         if (heaps[i]) return false;
     return true;
 }
 
-void Nim::print() {
-    cout << "Current State:\n";
-    for (int i=0; i<heaps.size(); i++) 
-        cout << "Heap " << i+1 << " : " << heaps[i] << "\n";
-}
-
-int Nim::nim_sum() {
+int Nim::nim_sum() const {
     int nimsum = heaps[0];
-    for (int i=1; i<heaps.size(); i++) 
+    for (int i = 1; i < heaps.size(); i++) 
         nimsum = nimsum ^ heaps[i]; 
     return nimsum; 
 }
 
+void Nim::ask_config() {
+    do {
+        cout << "Input the number of heaps: (greater than 0)\n";
+        cin >> num_heaps;
+    } while (num_heaps < 1);
+
+    do {
+        cout << "Input the max heap size: (greater than 1)\n";
+        cin >> max_heap_size;
+    } while (max_heap_size <= 1);
+}
+
+void Nim::print() {
+    cout << "Current State:\n";
+    for (int i = 0; i < heaps.size(); i++) 
+        cout << "Heap " << i+1 << " : " << heaps[i] << "\n";
+}
+
 void Nim::player_move() {
     do {
-        cout << "Input the heap and the number of stones you want to remove.\n" <<
+        cout << "You're " << players[!is_player_a] << ", please make your move.\n" <<
+            "Input the heap and the number of stones you want to remove.\n" <<
             "(e.g. To remove 3 stones from Heap 1, input \"1 3\", separated with SPACE)\n";
         cin >> heap_to_move;
         cin >> num_to_move;
-    } while (heap_to_move > MAX_HEAP_SIZE || heap_to_move < 1 ||
+    } while (heap_to_move > num_heaps || heap_to_move < 1 ||
         num_to_move > heaps[heap_to_move - 1] || num_to_move < 1 );
 
     heaps[heap_to_move - 1] -= num_to_move;
@@ -71,7 +87,7 @@ void Nim::ai_move() {
 
     // random behaviour when losing can be inevitable, waiting for the opponent to make a error
     if (nimsum == 0) {
-        for (int i=0; i<heaps.size(); i++) {
+        for (int i = 0; i < heaps.size(); i++) {
             if (heaps[i] > 0) {
                 heap_to_move = i + 1;
                 num_to_move = 1;
@@ -82,7 +98,7 @@ void Nim::ai_move() {
     }
     // move to reduce the nimsum to zero
     else {
-        for (int i=0; i<heaps.size(); i++) {
+        for (int i = 0; i < heaps.size(); i++) {
             int target_size = heaps[i] ^ nimsum;
             if (target_size < heaps[i] && target_size >= 0) {
                 heap_to_move = i + 1;
@@ -95,6 +111,8 @@ void Nim::ai_move() {
 }
 
 void Nim::play() {
+    
+
     do {
         cout << "You're Player A. Do you want to play with another player (0) or the AI (1)?\n" <<
             "Input 0 or 1 as the answer.\n";
@@ -104,17 +122,10 @@ void Nim::play() {
     print();
 
     while (!game_over()) {
-        if (is_player_a) {
-            cout << "You're Player A, please make your move.\n";
+        if (is_single_player && !is_player_a)
+            ai_move();
+        else
             player_move();
-        }
-        else {
-            if (is_single_player) ai_move();
-            else {
-                cout << "You're Player B, please make your move.\n";
-                player_move();
-            }
-        }
 
         cout << "\n" << players[!is_player_a] << "\'s turn, remove " << num_to_move
             << " stones from Heap " << heap_to_move << ".\n";
