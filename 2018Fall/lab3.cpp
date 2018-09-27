@@ -11,6 +11,7 @@ public:
 private:
     bool is_in_circle(double x, double y) const;
     void print_start() const;
+    void print_end() const;
     bool print_estimate() const;
     int ask_num_trials() const;
     double get_random_num();
@@ -35,6 +36,8 @@ void PiEstimator::print_start() const {
 
     cout << "Imagine there are raindrops falling on a square with an inscribed circle ...\n\n";
 }
+
+void PiEstimator::print_end() const { cout << "Bye Bye!\n"; }
 
 bool PiEstimator::print_estimate() const {
     if (pi != -1) {
@@ -77,7 +80,7 @@ void PiEstimator::run() {
         pi = estimate();
         print_estimate();
     }
-    cout << "Bye Bye!\n";
+    print_end();
 }
 
 int main() {
