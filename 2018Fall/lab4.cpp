@@ -28,8 +28,7 @@ char shiftAChar(char inputChar, char key, int op) {
 // encrypt or decrypt a message
 void endecrypt(const char input[], int inputSize, const char key[], int keySize, char output[], int op) {
 	// add your code here
-	int j = 0;
-	for (int i = 0; i < inputSize; i++) {
+	for (int i = 0, j = 0; i < inputSize; i++) {
 		output[i] = shiftAChar(input[i], key[j % keySize], op);
 		if (output[i] != ' ') j++;
 	}
