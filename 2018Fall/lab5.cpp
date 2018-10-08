@@ -44,6 +44,8 @@ void printMap(const char map[][WIDTH], bool debug = true) {
 // they be placed out of the game board.
 // You need to randomly place them on the board.
 // You can always assume the map has enough room to place the battle ship when the function is being called.
+
+// Helper function used
 bool canPlace(const char map[][WIDTH], int size, int row, int col, int dir) {
     while (size) {
         if (row < 0 || row >= HEIGHT || col < 0 || col >= WIDTH)
