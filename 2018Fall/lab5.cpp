@@ -45,18 +45,21 @@ void printMap(const char map[][WIDTH], bool debug = true) {
 // You need to randomly place them on the board.
 // You can always assume the map has enough room to place the battle ship when the function is being called.
 
-// Helper function used
+// Helper function
+void moveOnMap(int& row, int& col, int dir) {
+    if (dir == 0) row++;
+    else if (dir == 1) row--;
+    else if (dir == 2) col++;
+    else if (dir == 3) col--;
+}
+
+// Helper function
 bool canPlace(const char map[][WIDTH], int size, int row, int col, int dir) {
-    while (size) {
+    for (; size; moveOnMap(row, col, dir), size--) {
         if (row < 0 || row >= HEIGHT || col < 0 || col >= WIDTH)
             return false;
         else if (map[row][col] != '.')
             return false;
-        else if (dir == 0) row++;
-        else if (dir == 1) row--;
-        else if (dir == 2) col++;
-        else if (dir == 3) col--;
-        size--;
     }
     return true;
 }
@@ -69,14 +72,8 @@ void placeShip(char map[][WIDTH], int size) {
         col = rand() % WIDTH;
         dir = rand() % 4;
     } while (!canPlace(map, size, row, col, dir));
-    while (size) {
+    for (; size; moveOnMap(row, col, dir), size--)
         map[row][col] = 'U';
-        if (dir == 0) row++;
-        else if (dir == 1) row--;
-        else if (dir == 2) col++;
-        else if (dir == 3) col--;
-        size--;
-    }
 }
 
 // To check if a cannon hits a battleship.
