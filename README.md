@@ -12,4 +12,4 @@ Programming Assignment 1 to 3
 
 COMP 2011 2018 Fall  
 Lab 1 to 5  
-Progamming Assignment 1
+Programming Assignment 1 and 2
