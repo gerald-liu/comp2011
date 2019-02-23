@@ -15,4 +15,4 @@ Lab 1 to 5
 Programming Assignment 1 and 2
 
 COMP 2011 2019 Spring  
-Lab 1
+Lab 1 to 3
