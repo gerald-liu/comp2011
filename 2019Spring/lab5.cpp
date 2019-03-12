@@ -8,12 +8,16 @@ using namespace std;
 const int MAX_LEN = 256; 
 
 bool correct_word(const char word[], int start, int end) {
-    if (start == end)
-        return (word[start] - 'a' >= 0 && word[start] - 'a' < 26);
+    if (start > end)
+        return false;
+    else if (start == end)
+        return (word[start] >= 'a' && word[start] <= 'z');
     else if (word[end] == '@' || word[end] == '#')
         return correct_word(word, start, end-1);
     else if (word[end] == '|') {
-        for (int i=start; i<end; i++)
+        if (start == end - 1)
+            return false;
+        for (int i=start; i<=end-2; i++)
             if (correct_word(word, start, i) && correct_word(word, i+1, end-1))
                 return true;
         return false;
