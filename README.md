@@ -1,6 +1,8 @@
 # comp2011
 
-COMP2011	Introduction to Object-Oriented Programming  
+COMP2011	Programming with C++  
+(Old course title: Introduction to Object-Oriented Programming)  
+
 2017 Fall (and some of 2018 Fall and 2019 Spring), HKUST  
 [Course Website 2017 Fall](https://course.cse.ust.hk/comp2011_2017F)  
 [Current Course Website](https://course.cse.ust.hk/comp2011)
