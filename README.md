@@ -10,11 +10,11 @@ COMP 2011 2017 Fall
 Lab 1 to 11  
 Programming Assignment 1 to 3
 
-COMP 2011 2018 Fall  
+[COMP 2011 2018 Fall](https://github.com/gerald-liu/comp2011/tree/master/2018Fall)  
 Lab 1 to 5  
 Programming Assignment 1 and 2
 
-COMP 2011 2019 Spring  
+[COMP 2011 2019 Spring](https://github.com/gerald-liu/comp2011/tree/master/2019Spring)  
 Lab 1 to 6  
 Programming Assignment 1  
 (Skeleton only: Lab 4)
