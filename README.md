@@ -1,6 +1,6 @@
 # comp2011
 
-COMP2011	Programming with C++  
+COMP 2011 -	**Programming with C++**  
 (Old course title: Introduction to Object-Oriented Programming)  
 
 2017 Fall (and some of 2018 Fall and 2019 Spring), HKUST  
