@@ -17,6 +17,6 @@ Lab 1 to 5
 Programming Assignment 1 and 2
 
 [COMP 2011 2019 Spring](https://github.com/gerald-liu/comp2011/tree/master/2019Spring)  
-Lab 1 to 6  
+Lab 1 to 8  
 Programming Assignment 1  
-(Skeleton only: Lab 4)
+(Published solution: Lab 4 and 7)
