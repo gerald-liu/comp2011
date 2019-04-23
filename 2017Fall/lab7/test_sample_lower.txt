@@ -1,0 +1,20 @@
+text size: 19
+this
+is
+an
+example
+input
+it
+contains
+punctuations
+to
+be
+removed
+it
+also
+contains
+special
+words
+to
+be
+processed
