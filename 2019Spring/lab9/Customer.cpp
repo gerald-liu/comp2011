@@ -41,13 +41,12 @@ void insert_customer(Customer*& head, Customer* c){
 	}
 
 	Customer* curr = head;
-	while (curr->next) {
+	for (; curr->next; curr = curr->next) {
 		if (*c < *curr->next) {
 			c->next = curr->next;
 			curr->next = c;
 			return;
 		}
-		curr = curr->next;
 	}
 
 	curr->next = c;
@@ -64,11 +63,8 @@ void view_customers(const Customer* const head){
 	}
 
 	cout << "Current queue in club.\n";
-	const Customer* curr = head;
-	while (curr) {
+	for (const Customer* curr = head; curr; curr = curr->next)
 		cout << "Name: " << curr->name << "\tMembership: " << curr->type << '\n';
-		curr = curr->next;
-	}
 }
 
 Customer* dispatch_customer(Customer*& head){
